@@ -9,6 +9,7 @@ export async function POST(req: NextRequest) {
 
     const newTodo = new TodoModel({ ...todoDetails });
     await newTodo.save();
+    return NextResponse.json({ isValid: true });
   } catch (error) {
     return NextResponse.json({ isValid: false }, { status: 400 });
   }

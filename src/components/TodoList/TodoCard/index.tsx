@@ -13,6 +13,7 @@ interface TodoCardProps {
 const TodoCard: FC<TodoCardProps> = ({
   deleteButtonHandler,
   editButtonHandler,
+  onClickHandler,
   todo,
 }) => {
   return (

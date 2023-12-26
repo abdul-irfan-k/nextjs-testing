@@ -12,9 +12,8 @@ export interface todo {
   assignedDate?: Date;
   completedDate?: Date;
 }
-interface TodoContainerProps {
-}
-const TodoContainer: FC<TodoContainerProps> = ({ }) => {
+interface TodoContainerProps {}
+const TodoContainer: FC<TodoContainerProps> = ({}) => {
   const [todos, setTodos] = useState<Array<todo>>([]);
   const [popUpWindow, setPopUpWindow] = useState<"add" | undefined>(undefined);
 
@@ -22,7 +21,7 @@ const TodoContainer: FC<TodoContainerProps> = ({ }) => {
     setTodos([...todos, todo]);
     setPopUpWindow(undefined);
 
-    addTodo(todo)
+    addTodo(todo);
   };
 
   useEffect(() => {
@@ -35,7 +34,6 @@ const TodoContainer: FC<TodoContainerProps> = ({ }) => {
       }
     })();
   }, []);
-
 
   return (
     <div className="max-w-4xl mx-auto mt-4">
@@ -58,17 +56,13 @@ const TodoContainer: FC<TodoContainerProps> = ({ }) => {
       </div>
 
       <div className="mt-10">
-        <TodoList
-          title="Upcoming Task"
-          todos={todos}
-          setTodos={setTodos}
-        />
+        <TodoList title="Upcoming Task" todos={todos} setTodos={setTodos} />
       </div>
       <div className="mt-20">
         <TodoList
           title="completed Tasks"
           todos={todos.filter((todo) => todo.isChecked == true)}
-        setTodos={setTodos}
+          setTodos={setTodos}
         />
       </div>
     </div>

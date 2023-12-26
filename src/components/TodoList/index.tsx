@@ -2,6 +2,7 @@ import React, { FC, Fragment, useState } from "react";
 import { todo } from "../TodoContainner";
 import TodoCard from "./TodoCard";
 import { deleteTodo, editTodo } from "@/actions/TodoAction";
+import EditTodo from "../EditTask";
 
 interface TodoListProps {
   todos: todo[];
@@ -59,6 +60,8 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
             );
           })}
       </div>
+
+      {popUpWindow == "edit" && <EditTodo editTodoHandler={editSubmitButtonHandler} todo={selectedTodo} />}
     </div>
   );
 };
