@@ -10,9 +10,13 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@types/uuid": "^9.0.7",
+    "axios": "^1.6.2",
+    "mongoose": "^8.0.3",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.5",

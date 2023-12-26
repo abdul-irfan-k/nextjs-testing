@@ -1,12 +1,16 @@
 import React, { FC, useState } from "react";
 import { todo } from "../TodoContainner";
 import BackgroundBlurEffect from "../Shared/BackgroundBlurEffect";
+import { v4 as uuidv4 } from 'uuid';
 
-interface AddTaskProps {
+interface AddTodoProps {
   submitButtonHandler(todo: todo): void;
+  cancelButtonHandler(): void;
+  
 }
-const AddTask: FC<AddTaskProps> = ({ submitButtonHandler }) => {
+const AddTodo: FC<AddTodoProps> = ({ submitButtonHandler ,cancelButtonHandler}) => {
   const [todoDetail, setTodoDetail] = useState<todo>({
+    _id:"",
     content: "",
     isChecked: false,
     assignedDate: undefined,
@@ -14,8 +18,10 @@ const AddTask: FC<AddTaskProps> = ({ submitButtonHandler }) => {
   });
 
   const submitHandler = () => {
+    const generatedString = uuidv4()
     submitButtonHandler({ ...todoDetail, assignedDate: new Date() });
     setTodoDetail({
+      _id:generatedString,
       content: "",
       isChecked: false,
       assignedDate: undefined,
@@ -28,7 +34,7 @@ const AddTask: FC<AddTaskProps> = ({ submitButtonHandler }) => {
       <div className=" fixed px-10 py-5 rounded-md w-[40vw] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-neutral-950 text-slate-50 z-20">
         <div className="flex justify-between items-center">
           <span className="text-2xl font-semibold">Add Task</span>
-          <div className="relative w-10 aspect-square rounded-full flex justify-center items-center bg-red-500">
+          <div className="relative w-10 aspect-square rounded-full flex justify-center items-center bg-red-500" onClick={cancelButtonHandler}>
             <span className="text-lg ">x</span>
           </div>
         </div>
@@ -58,4 +64,4 @@ const AddTask: FC<AddTaskProps> = ({ submitButtonHandler }) => {
   );
 };
 
-export default AddTask;
+export default AddTodo;

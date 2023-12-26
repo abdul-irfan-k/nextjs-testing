@@ -8,7 +8,9 @@ describe("TodoContainer", () => {
     expect(heading).toBeInTheDocument();
   });
 
-  it("add button",() => {
-   const {getByText}  = render(<TodoContainer />);
-  })
- });
+  it("add button", () => {
+    const { getByText } = render(<TodoContainer />);
+    const button = getByText("add");
+    button.click;
+  });
+});

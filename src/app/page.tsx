@@ -9,7 +9,7 @@ export default function Home() {
   // const todos = await getAllTodos();
   return (
     <div>
-      <TodoContainer todos={[]} />
+      <TodoContainer  />
     </div>
   );
 }

@@ -1,26 +1,42 @@
 "use client";
-import React, { FC, useState } from "react";
-import AddTask from "../AddTask";
+import React, { FC, useEffect, useState } from "react";
+import AddTodo from "../AddTodo";
+import TodoList from "../TodoList";
+import axios from "axios";
+import { addTodo } from "@/actions/TodoAction";
 
 export interface todo {
+  _id: string;
   content: string;
   isChecked: boolean;
   assignedDate?: Date;
   completedDate?: Date;
 }
 interface TodoContainerProps {
-  todos: todo[];
 }
-const TodoContainer: FC<TodoContainerProps> = ({ todos: initialTodos }) => {
-  const [todos, setTodos] = useState<Array<todo>>(initialTodos);
-  const [popUpWindow, setPopUpWindow] = useState<"edit" | "add" | undefined>(
-    undefined
-  );
+const TodoContainer: FC<TodoContainerProps> = ({ }) => {
+  const [todos, setTodos] = useState<Array<todo>>([]);
+  const [popUpWindow, setPopUpWindow] = useState<"add" | undefined>(undefined);
 
   const addTodoHandler = (todo: todo) => {
     setTodos([...todos, todo]);
     setPopUpWindow(undefined);
+
+    addTodo(todo)
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.get("http://localhost:3000/api/get-todos");
+        setTimeout(data);
+      } catch (error) {
+        console.log("error", error);
+      }
+    })();
+  }, []);
+
+
   return (
     <div className="max-w-4xl mx-auto mt-4">
       <div className="text-center my-5 flex flex-col gap-4">
@@ -34,10 +50,27 @@ const TodoContainer: FC<TodoContainerProps> = ({ todos: initialTodos }) => {
           Add New Task
         </div>
         {popUpWindow == "add" && (
-          <AddTask submitButtonHandler={addTodoHandler} />
+          <AddTodo
+            submitButtonHandler={addTodoHandler}
+            cancelButtonHandler={() => setPopUpWindow(undefined)}
+          />
         )}
       </div>
-      <div className="text-center">{/* <TodoList tasks={tasks} /> */}</div>
+
+      <div className="mt-10">
+        <TodoList
+          title="Upcoming Task"
+          todos={todos}
+          setTodos={setTodos}
+        />
+      </div>
+      <div className="mt-20">
+        <TodoList
+          title="completed Tasks"
+          todos={todos.filter((todo) => todo.isChecked == true)}
+        setTodos={setTodos}
+        />
+      </div>
     </div>
   );
 };
