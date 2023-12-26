@@ -12,9 +12,12 @@ export interface todo {
   assignedDate?: Date;
   completedDate?: Date;
 }
-interface TodoContainerProps {}
-const TodoContainer: FC<TodoContainerProps> = ({}) => {
-  const [todos, setTodos] = useState<Array<todo>>([]);
+interface TodoContainerProps {
+  initialTodo:todo[]
+}
+const TodoContainer: FC<TodoContainerProps> = ({initialTodo}) => {
+ console.log('todos  asd',initialTodo)
+  const [todos, setTodos] = useState<Array<todo>>(initialTodo);
   const [popUpWindow, setPopUpWindow] = useState<"add" | undefined>(undefined);
 
   const addTodoHandler = (todo: todo) => {
@@ -26,12 +29,13 @@ const TodoContainer: FC<TodoContainerProps> = ({}) => {
 
   useEffect(() => {
     (async () => {
-      try {
-        const { data } = await axios.get("http://localhost:3000/api/get-todos");
-        setTimeout(data);
-      } catch (error) {
-        console.log("error", error);
-      }
+      // try {
+      //   const { data } = await axios.get("http://localhost:3000/api/get-todos");
+      //   console.log("data", data);
+      //   setTodos(data.todos);
+      // } catch (error) {
+      //   console.log("error", error);
+      // }
     })();
   }, []);
 
@@ -61,7 +65,7 @@ const TodoContainer: FC<TodoContainerProps> = ({}) => {
       <div className="mt-20">
         <TodoList
           title="completed Tasks"
-          todos={todos.filter((todo) => todo.isChecked == true)}
+          todos={todos}
           setTodos={setTodos}
         />
       </div>

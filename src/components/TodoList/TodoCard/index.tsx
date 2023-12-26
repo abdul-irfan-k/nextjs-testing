@@ -24,6 +24,7 @@ const TodoCard: FC<TodoCardProps> = ({
             "relative flex justify-center items-center rounded-full w-8 aspect-square border-[2px] overflow-hidden  " +
             (todo.isChecked ? " " : " border-neutral-400")
           }
+          onClick={onClickHandler}
         >
           {todo.isChecked && (
             <CorrectIcon className="fill-slate-50 w-4 aspect-square" />
@@ -34,7 +35,9 @@ const TodoCard: FC<TodoCardProps> = ({
 
       <div className="ml-auto gap-1 flex items-center ">
         {todo.completedDate == undefined && (
-          <div className="relative flex justify-center items-center   w-10 aspect-square overflow-hidden  ">
+          <div className="relative flex justify-center items-center   w-10 aspect-square overflow-hidden  "
+          onClick={editButtonHandler}
+          >
             <EditIcon className="fill-blue-500 w-6 aspect-square" />
           </div>
         )}

@@ -5,8 +5,11 @@ export const addTodo = async (details: Object) => {
 };
 
 export const editTodo = async (details: Object) => {
-  await axios.post("http://localhost:300/api/edit-todo");
+  await axios.post("http://localhost:3000/api/edit-todo",details);
+};
+export const checkTodo = async (details: Object) => {
+  await axios.post("http://localhost:3000/api/check-todo",details);
 };
 export const deleteTodo = async (details: Object) => {
-  await axios.post("http://localhost:300/api/delete-todo");
+  await axios.post("http://localhost:3000/api/delete-todo");
 };

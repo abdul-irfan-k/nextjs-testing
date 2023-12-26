@@ -1,7 +1,7 @@
 import React, { FC, Fragment, useState } from "react";
 import { todo } from "../TodoContainner";
 import TodoCard from "./TodoCard";
-import { deleteTodo, editTodo } from "@/actions/TodoAction";
+import { checkTodo, deleteTodo, editTodo } from "@/actions/TodoAction";
 import EditTodo from "../EditTask";
 
 interface TodoListProps {
@@ -9,6 +9,7 @@ interface TodoListProps {
   title: "Upcoming Task" | "completed Tasks";
   setTodos: React.Dispatch<React.SetStateAction<todo[]>>;
 }
+
 const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
   const [selectedTodo, setSeletectedTodo] = useState<todo | undefined>(
     undefined
@@ -23,6 +24,7 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
       ...todos.filter((todo) => todo._id != _id),
       { ...selectedTodo, isChecked: !selectedTodo.isChecked },
     ]);
+    checkTodo({_id,isChecked:!selectedTodo.isChecked})
   };
 
   const todoEditButtonHandler = (todo: todo) => {
@@ -31,6 +33,8 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
   };
 
   const editSubmitButtonHandler = (todo: todo) => {
+    setPopUpWindow(undefined)
+    setTodos([...todos.filter((t) => t._id != todo._id), { ...todo }]);
     editTodo(todo);
   };
 
@@ -46,12 +50,13 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
       </div>
       <div className="mt-2 flex flex-col gap-2 ">
         {todos
-          .filter((todo) => todo.isChecked == (title == "Upcoming Task"))
+          .filter((todo) => todo.isChecked == (title == "completed Tasks"))
           .map((todo, index) => {
+            console.log(todo);
             return (
               <Fragment key={index}>
                 <TodoCard
-                  {...todo}
+                  todo={todo}
                   onClickHandler={() => todoCardClickHandler(todo._id)}
                   deleteButtonHandler={() => {}}
                   editButtonHandler={() => todoEditButtonHandler(todo)}
@@ -61,7 +66,12 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
           })}
       </div>
 
-      {popUpWindow == "edit" && <EditTodo editTodoHandler={editSubmitButtonHandler} todo={selectedTodo} />}
+      {popUpWindow == "edit" && (
+        <EditTodo
+          editTodoHandler={editSubmitButtonHandler}
+          todo={selectedTodo}
+        />
+      )}
     </div>
   );
 };

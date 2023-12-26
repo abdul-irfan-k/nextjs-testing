@@ -19,9 +19,9 @@ const AddTodo: FC<AddTodoProps> = ({ submitButtonHandler ,cancelButtonHandler}) 
 
   const submitHandler = () => {
     const generatedString = uuidv4()
-    submitButtonHandler({ ...todoDetail, assignedDate: new Date() });
+    submitButtonHandler({ ...todoDetail, assignedDate: new Date(),_id:generatedString });
     setTodoDetail({
-      _id:generatedString,
+      _id:"",
       content: "",
       isChecked: false,
       assignedDate: undefined,

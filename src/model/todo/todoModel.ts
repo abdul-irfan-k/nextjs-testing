@@ -1,8 +1,8 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const todoSchema = new Schema(
   {
-    _id: { type: String, unique: true },
+    _id: { type: String },
     content: { type: String, required: true },
     isChecked: { type: Boolean, default: false },
     assignedDate: { type: Date, default: Date.now() },
@@ -12,5 +12,5 @@ const todoSchema = new Schema(
 );
 
 
-const TodoModel = model("Todo",todoSchema)
+const TodoModel = mongoose.models.Todo || model("Todo",todoSchema)
 export default TodoModel

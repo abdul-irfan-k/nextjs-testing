@@ -1,15 +1,15 @@
 import TodoContainer from "@/components/TodoContainner";
+import axios from "axios";
 
-// export const getAllTodos = async (): Promise<ITask[]> => {
-//   const res = await fetch(`${baseUrl}/tasks`, { cache: "no-store" });
-//   const todos = await res.json();
-//   return todos;
-// };
-export default function Home() {
-  // const todos = await getAllTodos();
+export const getAllTodos = async () => {
+  const { data } = await axios.get("http://localhost:3000/api/get-todos");
+  return data.todos;
+};
+export default async function Home() {
+  const todos = await getAllTodos();
   return (
     <div>
-      <TodoContainer  />
+      <TodoContainer initialTodo={todos} />
     </div>
   );
 }
