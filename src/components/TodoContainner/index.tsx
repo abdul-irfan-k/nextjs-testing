@@ -13,10 +13,10 @@ export interface todo {
   completedDate?: Date;
 }
 interface TodoContainerProps {
-  initialTodo:todo[]
+  initialTodo: todo[];
 }
-const TodoContainer: FC<TodoContainerProps> = ({initialTodo}) => {
- console.log('todos  asd',initialTodo)
+const TodoContainer: FC<TodoContainerProps> = ({ initialTodo }) => {
+  console.log("todos  asd", initialTodo);
   const [todos, setTodos] = useState<Array<todo>>(initialTodo);
   const [popUpWindow, setPopUpWindow] = useState<"add" | undefined>(undefined);
 
@@ -51,23 +51,19 @@ const TodoContainer: FC<TodoContainerProps> = ({initialTodo}) => {
         >
           Add New Task
         </div>
-        {popUpWindow == "add" && (
-          <AddTodo
-            submitButtonHandler={addTodoHandler}
-            cancelButtonHandler={() => setPopUpWindow(undefined)}
-          />
-        )}
+          {popUpWindow == "add" && (
+            <AddTodo
+              submitButtonHandler={addTodoHandler}
+              cancelButtonHandler={() => setPopUpWindow(undefined)}
+            />
+          )}
       </div>
 
       <div className="mt-10">
         <TodoList title="Upcoming Task" todos={todos} setTodos={setTodos} />
       </div>
       <div className="mt-20">
-        <TodoList
-          title="completed Tasks"
-          todos={todos}
-          setTodos={setTodos}
-        />
+        <TodoList title="completed Tasks" todos={todos} setTodos={setTodos} />
       </div>
     </div>
   );

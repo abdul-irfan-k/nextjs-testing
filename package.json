@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/uuid": "^9.0.7",
     "axios": "^1.6.2",
+    "eslint-plugin-testing-library": "^6.2.0",
     "mongoose": "^8.0.3",
     "next": "14.0.4",
     "react": "^18",
@@ -19,7 +20,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/jest-dom": "^6.1.6",
     "@testing-library/react": "^14.1.2",
     "@types/jest": "^29.5.11",
     "@types/node": "^20",
