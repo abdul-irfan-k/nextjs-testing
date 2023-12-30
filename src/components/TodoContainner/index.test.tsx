@@ -4,13 +4,12 @@ import AddTodo from "../AddTodo";
 import { exportTraceState } from "next/dist/trace";
 
 describe("TodoContainer", () => {
-  it("render todo heading", () => {
+  it("Testing for heading", () => {
     render(<TodoContainer initialTodo={[]} />);
-    const heading = screen.getByRole("heading");
-    expect(heading).toBeInTheDocument();
+    expect(screen.queryByText("ToDo List")).toBeInTheDocument();
   });
 
-  it("Tests for Add Task Component", () => {
+  it("Tests for Add Task Menu", () => {
     const { getByTestId, getByText } = render(
       <TodoContainer initialTodo={[]} />
     );
