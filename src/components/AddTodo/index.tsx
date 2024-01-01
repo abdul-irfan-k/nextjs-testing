@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { todo } from "../TodoContainner";
 import BackgroundBlurEffect from "../Shared/BackgroundBlurEffect";
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 interface AddTodoProps {
   submitButtonHandler(todo: todo): void;
@@ -18,7 +18,7 @@ const AddTodo: FC<AddTodoProps> = ({ submitButtonHandler ,cancelButtonHandler}) 
   });
 
   const submitHandler = () => {
-    const generatedString = uuidv4()
+    const generatedString = 'asdfasdf'
     submitButtonHandler({ ...todoDetail, assignedDate: new Date(),_id:generatedString });
     setTodoDetail({
       _id:"",

@@ -1,7 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import TodoContainer from ".";
 import AddTodo from "../AddTodo";
-import { exportTraceState } from "next/dist/trace";
 
 describe("TodoContainer", () => {
   it("Testing for heading", () => {
