@@ -5,7 +5,7 @@ const createJestConfig = nextJest({
   dir: "./",
 });
 
-const config:Config = {
+const config: Config = {
   coverageProvider: "v8",
   testEnvironment: "jsdom",
   verbose: true,
@@ -13,9 +13,12 @@ const config:Config = {
   // preset: "ts-jest",
   // transform:{"\\.[jt]sx?$": "babel-jest"},
   testEnvironmentOptions: {
-    customExportConditions: [''],
+    customExportConditions: [""],
   },
-  setupFiles:['./jest-polyfills.js']
+  setupFiles: ["./jest-polyfills.js"],
+  moduleNameMapper: {
+    uuid: require.resolve("uuid"),
+  },
 };
 
 export default createJestConfig(config);
