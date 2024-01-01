@@ -1,8 +1,8 @@
-import { http } from "msw";
+import { HttpResponse, http } from "msw";
 import { todos } from "../data/todo-data";
 
 export const handlers = [
-  http.get("/api/get-todos", (req, res, ctx) => {
-    return res(ctx.json({ todos: todos }));
+  http.post("http://localhost:3000/api/get-todos", ({ request }) => {
+    return new HttpResponse({ todos: todos });
   }),
 ];
