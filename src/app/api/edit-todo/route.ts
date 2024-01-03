@@ -6,14 +6,14 @@ export async function POST(req: NextRequest) {
   try {
     const { isConnected } = await connectDb();
     const todoDetails = await req.json();
-console.log('todo Details  a',todoDetails)
+    console.log("todo Details  a", todoDetails);
     await TodoModel.findOneAndUpdate(
       { _id: todoDetails._id },
       { ...todoDetails }
     );
     return NextResponse.json({ isValid: true });
   } catch (error) {
-    console.log("error ",error)
+    console.log("error ", error);
     return NextResponse.json({ isVaild: false }, { status: 400 });
   }
 }

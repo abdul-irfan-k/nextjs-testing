@@ -1,7 +1,8 @@
+import { todo } from "@/components/TodoContainner";
 import axios from "axios";
 
-export const addTodo = async (details: Object) => {
-  await axios.post("http://localhost:3000/api/add-todo", details);
+export const addTodo = async (details: todo) => {
+  return await axios.post("http://localhost:3000/api/add-todo", details);
 };
 
 export const editTodo = async (details: Object) => {

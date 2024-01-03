@@ -38,7 +38,7 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
     editTodo(todo);
   };
 
-  const deleteSubmitButtonHandler = (todo) => {
+  const deleteSubmitButtonHandler = (todo:todo) => {
     deleteTodo(todo);
   };
   return (
