@@ -35,13 +35,17 @@ const TodoCard: FC<TodoCardProps> = ({
 
       <div className="ml-auto gap-1 flex items-center ">
         {todo.completedDate == undefined && (
-          <div className="relative flex justify-center items-center   w-10 aspect-square overflow-hidden  "
-          onClick={editButtonHandler}
+          <div
+            className="relative flex justify-center items-center   w-10 aspect-square overflow-hidden  "
+            onClick={editButtonHandler}
           >
             <EditIcon className="fill-blue-500 w-6 aspect-square" />
           </div>
         )}
-        <div className="relative flex justify-center items-center  w-10 aspect-square overflow-hidden  ">
+        <div
+          className="relative flex justify-center items-center  w-10 aspect-square overflow-hidden  "
+          onClick={deleteButtonHandler}
+        >
           <DeleteIcon className="fill-red-500 w-full aspect-square" />
         </div>
       </div>

@@ -6,8 +6,13 @@ import BackgroundBlurEffect from "../Shared/BackgroundBlurEffect";
 interface EditTodoProps {
   todo: todo;
   editTodoHandler(todo: todo): void;
+  cancelButtonHandler(): void;
 }
-const EditTodo: FC<EditTodoProps> = ({ editTodoHandler, todo }) => {
+const EditTodo: FC<EditTodoProps> = ({
+  editTodoHandler,
+  todo,
+  cancelButtonHandler,
+}) => {
   const [todoDetail, setTodoDetail] = useState<todo>(todo);
 
   const editHandler = () => {
@@ -18,7 +23,10 @@ const EditTodo: FC<EditTodoProps> = ({ editTodoHandler, todo }) => {
       <div className=" fixed px-10 py-5 rounded-md w-[40vw] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-neutral-950 text-slate-50 z-20">
         <div className="flex justify-between items-center">
           <span className="text-2xl font-semibold">Edit Task</span>
-          <div className="relative w-10 aspect-square rounded-full flex justify-center items-center bg-red-500">
+          <div
+            className="relative w-10 aspect-square rounded-full flex justify-center items-center bg-red-500"
+            onClick={cancelButtonHandler}
+          >
             <span className="text-lg ">x</span>
           </div>
         </div>

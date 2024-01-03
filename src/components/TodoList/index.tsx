@@ -3,6 +3,7 @@ import { todo } from "../TodoContainner";
 import TodoCard from "./TodoCard";
 import { checkTodo, deleteTodo, editTodo } from "@/actions/TodoAction";
 import EditTodo from "../EditTask";
+import DeleteTodo from "../DeleteTodo";
 
 interface TodoListProps {
   todos: todo[];
@@ -24,7 +25,7 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
       ...todos.filter((todo) => todo._id != _id),
       { ...selectedTodo, isChecked: !selectedTodo.isChecked },
     ]);
-    checkTodo({_id,isChecked:!selectedTodo.isChecked})
+    checkTodo({ _id, isChecked: !selectedTodo.isChecked });
   };
 
   const todoEditButtonHandler = (todo: todo) => {
@@ -32,13 +33,18 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
     setPopUpWindow("edit");
   };
 
+  const todoDeleteButtonHandler = (todo:todo) => {
+    setSeletectedTodo(todo)
+    setPopUpWindow("delete")
+  }
+
   const editSubmitButtonHandler = (todo: todo) => {
-    setPopUpWindow(undefined)
+    setPopUpWindow(undefined);
     setTodos([...todos.filter((t) => t._id != todo._id), { ...todo }]);
     editTodo(todo);
   };
 
-  const deleteSubmitButtonHandler = (todo) => {
+  const deleteSubmitButtonHandler = (todo: todo) => {
     deleteTodo(todo);
   };
   return (
@@ -58,7 +64,7 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
                 <TodoCard
                   todo={todo}
                   onClickHandler={() => todoCardClickHandler(todo._id)}
-                  deleteButtonHandler={() => {}}
+                  deleteButtonHandler={() => todoDeleteButtonHandler(todo)}
                   editButtonHandler={() => todoEditButtonHandler(todo)}
                 />
               </Fragment>
@@ -66,10 +72,28 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
           })}
       </div>
 
-      {popUpWindow == "edit" && (
+      {popUpWindow == "edit" && selectedTodo != undefined && (
         <EditTodo
           editTodoHandler={editSubmitButtonHandler}
           todo={selectedTodo}
+          cancelButtonHandler={() => {
+            setPopUpWindow(undefined);
+            setSeletectedTodo(undefined);
+          }}
+        />
+      )}
+
+      {popUpWindow == "delete" && selectedTodo != undefined && (
+        <DeleteTodo
+          cancelButtonHandler={() => {
+            setPopUpWindow(undefined);
+            setSeletectedTodo(undefined);
+          }}
+          deleteHandler={() => {
+            setPopUpWindow(undefined);
+            setSeletectedTodo(undefined);
+            deleteSubmitButtonHandler(selectedTodo);
+          }}
         />
       )}
     </div>
