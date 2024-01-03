@@ -35,7 +35,8 @@ const TodoList: FC<TodoListProps> = ({ title, todos, setTodos }) => {
 
   const todoDeleteButtonHandler = (todo:todo) => {
     setSeletectedTodo(todo)
-    setPopUpWindow("delete")
+    setPopUpWindow("delete",todo)
+
   }
 
   const editSubmitButtonHandler = (todo: todo) => {

@@ -11,5 +11,6 @@ export const checkTodo = async (details: Object) => {
   await axios.post("http://localhost:3000/api/check-todo",details);
 };
 export const deleteTodo = async (details: Object) => {
-  await axios.post("http://localhost:3000/api/delete-todo");
+  console.log("detail",details,"closed")
+  await axios.post("http://localhost:3000/api/delete-todo",details);
 };
